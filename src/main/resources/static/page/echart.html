@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript" src="/webjars/echarts/4.0.4/dist/echarts.js"></script>
+<script type="text/javascript" src="/webjars/echarts/4.0.4/dist/echarts.common.min.js"></script>
+<title>业务办理报表</title>
+</head>
+<script type="text/javascript">
+	var option
+	var myChart
+
+	$(function() {
+		initChart()
+		//基于准备好的dom，初始化echarts实例
+		myChart = echarts.init(document.getElementById('main'));
+		myChart.setOption(option)
+	})
+
+	function showWeight() {
+		$.ajax({
+			type : "GET",
+			url : "myWeight?id=1",
+			data : {},
+			success : function(r) {
+				//console.log(r)
+				initChart()
+				//option.title.text = r.username+"的体重"
+				option.legend.data[0] = r.username
+				option.series[0] = {
+					"name" : r.username,
+					"type" : "line",
+					"data" : []
+				}
+				//option.series[0].name = r.username
+				//option.series[0].type = 'line'
+				for ( var i in r.weights) {
+					option.series[0].data[i] = r.weights[i].weight
+					option.xAxis[0].data[i] = r.weights[i].wdate
+				}
+				//option.series[1] = {"name": r.username, "type": "line", "data": [1,2,8,12,21,9]}
+				myChart.setOption(option)
+			}
+		});
+	}
+
+	function initChart() {
+		option = {
+			title : {
+				text : "各省业务办理数量情况",
+				x : "center"
+			},
+			tooltip : {
+				trigger : "item",
+				formatter : "{a} <br/>{b} : {c}"
+			},
+			legend : {
+				x : 'left',
+				data : ['s','s']
+			},
+			xAxis : [ {
+				type : "category",
+				name : "省份",
+				splitLine : {
+					show : false
+				},
+				data : ['广东','北京','上海','山东','湖南']
+			} ],
+			
+			yAxis : [ {
+				type : "value",
+				axisLabel : {
+					formatter : '{value}'
+				},
+				name : "重点业务办理量",
+				max : 1500,
+				min : 0,
+				splitNumber : 6
+			} ],
+			toolbox : {
+				show : true,
+				feature : {
+					mark : {
+						show : true
+					},
+					dataView : {
+						show : true,
+						readOnly : true
+					},
+					restore : {
+						show : true
+					},
+					saveAsImage : {
+						show : true
+					}
+				}
+			},
+			calculable : true,
+			series : []
+		};
+	}
+</script>
+<body>
+	<h1 style="text-align: center">业务办理</h1>
+	<div id="main" style="height: 460px; width: 85%; margin: 20px auto 0"></div>
+</body>
+</html>

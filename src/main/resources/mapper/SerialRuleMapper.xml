@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reven.dao.SerialRuleMapper">
+	<resultMap id="BaseResultMap" type="com.reven.model.entity.SerialRule">
+		<!-- WARNING - @mbg.generated -->
+		<id column="serial_rule_id" jdbcType="INTEGER" property="serialRuleId" />
+		<result column="module_code" jdbcType="VARCHAR" property="moduleCode" />
+		<result column="module_name" jdbcType="VARCHAR" property="moduleName" />
+		<result column="with_year" jdbcType="BIT" property="withYear" />
+		<result column="year_length" jdbcType="INTEGER" property="yearLength" />
+		<result column="with_month" jdbcType="BIT" property="withMonth" />
+		<result column="with_day" jdbcType="BIT" property="withDay" />
+		<result column="prefix" jdbcType="VARCHAR" property="prefix" />
+		<result column="serial_length" jdbcType="INTEGER" property="serialLength" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		serial_rule_id, module_code, module_name, with_year, with_month, with_day, prefix,
+		year_length,
+		serial_length
+	</sql>
+
+	<select id="getByCodeAndDate1" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_rule where module_code=#{moduleCode} and
+		with_year=#{year} and with_month=#{month} and with_day=#{day}
+	</select>
+	<select id="getByCodeAndDate2" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_rule where module_code=#{moduleCode} and
+		with_year=#{year}
+		and with_month=#{month} and with_day=0
+	</select>
+	<select id="getByCodeAndDate3" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_rule where module_code=#{moduleCode} and
+		with_year=#{year} and with_month=0 and with_day=0
+	</select>
+	<select id="getByCodeAndDate4" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_rule where module_code=#{moduleCode} and with_year=0 and
+		with_month=0 and with_day=0
+	</select>
+</mapper>

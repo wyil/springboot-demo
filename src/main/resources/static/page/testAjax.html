@@ -1,0 +1,25 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#b01").click(function() {
+			htmlobj = $.ajax({
+				url : "/demo/testException2?date=214324",
+				async : false
+			});
+			$("#myDiv").html(htmlobj.responseText);
+		});
+	});
+</script>
+</head>
+<body>
+
+	<div id="myDiv">
+		<h2>通过 AJAX 改变文本</h2>
+	</div>
+	<button id="b01" type="button">改变内容</button>
+
+</body>
+</html>

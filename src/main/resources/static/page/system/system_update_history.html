@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+<meta charset="UTF-8" />
+<title>系统更新日志—数据分享</title>
+<script type="text/javascript" src="/jquery-easyui/jquery.min.js"></script>
+</head>
+<body>
+	<div class="time">2018-04-23</div><div class="version">v5.0.0</div><div class="number">6</div><div class="content"><pre>-默认字体大小由13px调整为14px，并增加小字体模式。
+-优化智能树控件，弹出框不显示标题栏。
+-树控件增加allHeaderStyle属性，为所有树节点应用标题栏样式。
+-首页主框架由上下布局改为左右布局。
+-面板增加isFluid属性（是否流式面板，占据父容器的全部宽度）。
+-选项卡控件增加inkBar属性，用来启用墨水条样式。
++修正iOS下GroupPanel标题栏文字消失的问题（阿博-unaq37u）。
+    -内部优化：去除f-panel的overflow:hidden样式。
+    -内部优化：折叠面板时，改变f-panel-bodyct的高度而不是f-panel的高度。
+-修正IE下DropDownList（启用emptyText和editable属性）默认弹出下拉框的问题（舞柯庶-21615）。
++增加响应式布局。
+    -父容器定义layout=block属性，子项通过block，blockSM，blockMD，blockLG定义块大小。
+    -多个子项的宽度总和等于12，则占据一行，多余的子项会另起一行。
+    -使用space定义子项间隔，使用blockCount定义总块数（默认为12）。
+    -官网示例增加响应式布局主菜单，响应式首页，以及10多个示例。
+</pre></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>测试xss</title>
+<script type="text/javascript" src="/webjars/jquery/3.3.1/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#b01").click(function() {
+			htmlobj = $.ajax({
+				url : "/xss/test1?p1=<a>214324</a>&p2=onclick=\"alert(1);\"",
+				async : false
+			});
+			$("#myDiv").html(htmlobj.responseText);
+		});
+	});
+</script>
+</head>
+<body>
+	
+	<br/>
+    /xss/test1:post
+    <form action="/xss/test1" method="post">
+       <input name="p1" value="<a>214324</a>">
+       <input name="p2" value="<div onclick='alert(1);'>点击</div>">
+       <button type="submit">submit</button>
+    </form>
+	<br/>
+	/xss/test1:get
+	<form action="/xss/test1">
+	   <input name="p1" value="<a>214324</a>">
+	   <input name="p2" value="<div onclick='alert(1);'>点击</div>">
+	   <button type="submit">submit</button>
+	</form>
+	<a href="/xss/excludeUrl?p1=<a>214324<%2Fa>&p2=<div+onclick%3D'alert(1)%3B'>点击<%2Fdiv>">/xss/excludeUrl</a>
+	<br/>
+	<br/>
+    /xss/testExcludePar:
+    <form action="/xss/testExcludePar" method="get">
+       <input name="content" value="<a>214324</a>">
+       <input name="p2WithHtml" value="<div onclick='alert(1);'>点击</div>">
+       <button type="submit">submit</button>
+    </form>
+    
+    <br/>
+    测试上传
+    <br/>
+    测试json
+    
+    
+</body>
+</html>

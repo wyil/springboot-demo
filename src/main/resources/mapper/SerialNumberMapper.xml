@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reven.dao.SerialNumberMapper">
+	<resultMap id="BaseResultMap" type="com.reven.model.entity.SerialNumber">
+		<!-- WARNING - @mbg.generated -->
+		<id column="auto_id" jdbcType="INTEGER" property="autoId" />
+		<result column="serial_rule_id" jdbcType="INTEGER" property="serialRuleId" />
+		<result column="serial_year" jdbcType="INTEGER" property="serialYear" />
+		<result column="serial_month" jdbcType="INTEGER" property="serialMonth" />
+		<result column="serial_day" jdbcType="INTEGER" property="serialDay" />
+		<result column="current_serial" jdbcType="INTEGER" property="currentSerial" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		auto_id, serial_rule_id, serial_year, serial_month, serial_day, current_serial, update_time
+	</sql>
+
+	<select id="getByRuleId1" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_number where serial_rule_id=#{ruleId} and serial_year=#{year}
+		and serial_month=#{month} and
+		serial_day=#{day}
+	</select>
+	<select id="getByRuleId2" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_number where serial_rule_id=#{ruleId} and serial_year=#{year}
+		and serial_month=#{month} and serial_day is
+		null
+	</select>
+	<select id="getByRuleId3" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_number where serial_rule_id=#{ruleId} and serial_year=#{year} and serial_month is null and serial_day is
+		null
+	</select>
+	<select id="getByRuleId4" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from serial_number where serial_rule_id=#{ruleId} and serial_year is null and serial_month is null and serial_day is
+		null
+	</select>
+	<update id="updateSerialNumber">
+		update serial_number set current_serial=#{newMaxSerial}
+		,update_time=#{updateTime} where
+		auto_id=#{autoId} and
+		current_serial=#{maxSerial}
+	</update>
+</mapper>

@@ -1,0 +1,26 @@
+# yml中的中文注释与#间隔一个空格，避免yml文件乱码的时候导致配置不正确
+# 避免使用中文配置，如果一定要用中文请保证修改时编码格式正确
+#  用于springboot启动时指定的外部配置文件
+# 将一些发布部署时会变更的配置重写到这里
+#
+# 属性和值也是大小写敏感
+# 数据格式为k:(空格)v：表示一对键值对（空格必须有）；
+# 以空格的缩进来控制层级关系；
+spring.profiles.active: pro
+
+server.port: 8082
+
+logging.level:
+  root: info # 总的日志级别
+  com.reven.controller: info # 指定包的日志级别
+
+# 数据库配置
+deploy.datasource:
+  ip: localhost
+  dbname: test
+  username: root
+  password: 123
+ 
+
+# mybatis打印sql相关信息（如何取消？）
+mybatis.configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

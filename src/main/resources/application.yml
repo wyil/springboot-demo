@@ -1,0 +1,118 @@
+# spring.profiles.active: dev
+spring.application:
+    name: "@project.name@" #从pom.xml中获取
+
+server.port: 8082
+
+
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: info # 总的日志级别,会覆盖logback中的root级别
+    #com.reven.controller: info # 指定包的日志级别
+   
+#  控制台彩色日志，需要插件支持
+spring.output.ansi.enabled: ALWAYS
+
+spring.mvc:
+  view.suffix: .html  # 给返回的页面添加后缀名
+  view.prefix: classpath:/templates/  # 定位模板的目录
+  static-path-pattern: /static/** # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  
+
+# 数据库配置
+deploy.datasource:
+  ip: localhost
+  dbname: test
+  username: root
+  password: 123
+
+spring.datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://${deploy.datasource.ip}:3366/test?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  username: ${deploy.datasource.username}
+  password: ${deploy.datasource.password}
+  type: com.alibaba.druid.pool.DruidDataSource
+  initialSize: 5
+  minIdle: 5
+  maxActive: 20
+  maxWait: 60000
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 1 FROM DUAL
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  poolPreparedStatements: true
+#  配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+  filters: stat,wall,log4j
+  maxPoolPreparedStatementPerConnectionSize: 20
+  useGlobalDataSourceStat: true
+  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    
+
+#  定时任务
+job.cron-expression:
+  demo: 0 0/1 * * * *
+  fixedDelay: 5000 # 间隔5秒执行一次
+
+# 公共配置与profiles选择无关
+mybatis:
+# mybatis日志打印设置
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
+
+spring.cache:
+  # demo-是系统名称或规定使用的模块名称之类，注意保证不同系统之间名字的唯一
+    cache-names: demo-cache10min,demo-cache1Hour,demo-cache1Day
+
+# 是否开启xss防护
+xss.on: true 
+# 不过滤的url清单用逗号隔开，使用正则表达式匹配url
+xss.url.excludes: /favicon.ico,/images/*,/img/*,/js/*,/css/*,/page/*,/style/*,/xss/excludeUrl,/design/.*/ajaxSave.do
+# 是否清除xss脚本，否：使用HtmlUtils.htmlEscape转义字符
+xss.isclean: 'false'
+
+
+
+
+
+
+
+
+
+## 监控与管理
+management:
+  security:
+    enabled: true  # 打开安全认证——通过security认证
+    roles: SUPERUSER
+  context-path: /manage
+security:
+  basic:
+    path: /manage # 对于manage这个路径才进行拦截
+    enabled: true
+  user:
+    name: reven
+    password: secret123
+  
+# Actuator 的info端点显示信息
+info.app:
+   name: '@project.name@' # 从pom.xml中获取
+   description: '@project.description@'
+   version: '@project.version@'
+   spring-boot-version: '@project.parent.version@'
+   encoding: '@project.build.sourceEncoding@'
+   java:
+      version: "@java.version@"
+        
+endpoints:
+  shutdown:
+    enabled: false
+  health:
+    sensitive: true
+    enabled: true
+    show-details: always
+  metrics:  
+    sensitive: true
+    enabled: true
