@@ -26,6 +26,6 @@ public class IndexController extends BaseController {
         logger.info("ServerIp={}", serverIp);
         logger.info("UserIp={}", userIp);
         // 返回 /templates/index.html页面
-        return "index";
+        return "/index";
     }
 }

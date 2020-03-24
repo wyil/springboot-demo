@@ -2,7 +2,11 @@
 spring.application:
     name: "@project.name@" #从pom.xml中获取
 
-server.port: 8082
+server:
+  port: 8082
+  servlet:
+    context-path: /demo
+    session.cookie.path: /admin
 
 
 
@@ -19,7 +23,6 @@ spring.mvc:
   view.suffix: .html  # 给返回的页面添加后缀名
   view.prefix: classpath:/templates/  # 定位模板的目录
   static-path-pattern: /static/** # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
-  
 
 # 数据库配置
 deploy.datasource:

@@ -1,0 +1,56 @@
+.qudao_l {
+	height: 94px;
+	line-height: 25px;
+	border-right: #eee 1px solid;
+}
+
+.qudao_r {
+	border-bottom: none;
+	height: 104px;
+}
+
+.qudao_r p {
+	margin: 0;
+	height: 47px;
+	line-height: 40px;
+	border-bottom: #eee 1px solid;
+	box-sizing: border-box;
+}
+
+.datagrid-header tr {
+	height: 35px;
+}
+
+.datagrid-body .datagrid-btable tr {
+	height: 35px;
+}
+
+.datagrid-btable .datagrid-cell {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+	border-color: #e8e7e7;
+}
+
+.datagrid-header td, .datagrid-body td, .datagrid-footer td {
+	border-width: 0 0px 1px 0;
+	border-style: solid;
+	margin: 0;
+	padding: 0;
+}
+
+.contentCenter {
+	text-align: center;
+}
+
+.contentLeft {
+	text-align: left;
+}
+
+.datagrid-row-selected {
+	background: lightgrey;
+	color: black;
+}
