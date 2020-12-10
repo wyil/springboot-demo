@@ -20,10 +20,10 @@ public class IndexController extends BaseController {
     @RequestMapping({ "/index", "/" })
     public String index(Model model) {
         model.addAttribute("hello", "张三" + new Date());
-        String serverIp = getServerIp();
+//        String serverIp = getServerIp();
         String userIp = getCliectIp();
         model.addAttribute("UserIp", userIp);
-        logger.info("ServerIp={}", serverIp);
+//        logger.info("ServerIp={}", serverIp);
         logger.info("UserIp={}", userIp);
         // 返回 /templates/index.html页面
         return "/index";

@@ -206,6 +206,12 @@
 	      <artifactId>jsoup</artifactId>
 	      <version>1.11.3</version>
 	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.18</version><!--$NO-MVN-MAN-VER$-->
+		</dependency>
 
 	</dependencies>
 
@@ -222,13 +228,13 @@
 					<outputDirectory>${project.outputDirectory}</outputDirectory>
 				</configuration>
 				<executions>
-					<execution>
+					<!-- <execution>
 						<goals>
 							<goal>build-info</goal>
-							<!-- 利用重新打包，将文件排除 -->
+							利用重新打包，将文件排除
 							<goal>repackage</goal>
 						</goals>
-					</execution>
+					</execution> -->
 				</executions>
 			</plugin>
 

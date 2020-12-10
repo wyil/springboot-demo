@@ -122,9 +122,9 @@ public class BaseController {
      * 
      * @return
      */
-    public String getServerIp() {
-        return WebUtil.getServerIp();
-    }
+//    public String getServerIp() {
+//        return WebUtil.getServerIp();
+//    }
 
     /**
      * 获取json格式数据

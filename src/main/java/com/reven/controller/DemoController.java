@@ -154,7 +154,7 @@ public class DemoController extends BaseController {
     @GetMapping("/list")
     public ResResult list(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size) {
-        logger.info("ServerIp={}", getServerIp());
+//        logger.info("ServerIp={}", getServerIp());
         logger.error("UserIp={}", getCliectIp());
         logger.warn("UserIp={}", getCliectIp());
         logger.info("UserIp={}", getCliectIp());

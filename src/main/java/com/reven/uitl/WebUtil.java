@@ -1,8 +1,5 @@
 package com.reven.uitl;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -45,22 +42,6 @@ public class WebUtil {
         return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 
-    /**
-     * 获取服务器ip地址
-     * 
-     * @return
-     */
-    public static String getServerIp() {
-        InetAddress address;
-        String serverIpAddress = null;
-        try {
-            // 获取的是本地的IP地址
-            address = InetAddress.getLocalHost();
-            serverIpAddress = address.getHostAddress();
-        } catch (UnknownHostException e) {
-        }
-        return serverIpAddress;
-    }
 
     /**
      * 判断是否为ajax请求
@@ -68,7 +49,12 @@ public class WebUtil {
      * @param request
      * @return
      */
-    public static String getRequestType(HttpServletRequest request) {
-        return request.getHeader("X-Requested-With");
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        String requestedWith = request.getHeader("x-requested-with");
+        if (requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
